@@ -1,4 +1,4 @@
-    package TaskManager;
+    package taskManager;
 
     import model.Epic;
     import model.Status;
@@ -8,20 +8,14 @@
 
     public class TaskManager {
 
-        private HashMap<Integer, Task> tasks;
-        private HashMap<Integer, Epic> epics;
-        private HashMap<Integer, SubTask> subTasks;
+        private HashMap<Integer, Task> tasks = new HashMap<>();
+        private HashMap<Integer, Epic> epics = new HashMap<>();
+        private HashMap<Integer, SubTask> subTasks = new HashMap<>();
 
         int seq = 1;
 
         private int generateId() {
             return seq++;
-        }
-
-        public TaskManager() {
-            this.tasks = new HashMap<>();
-            this.epics = new HashMap<>();
-            this.subTasks = new HashMap<>();
         }
 
         public Task create(Task task) {

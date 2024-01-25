@@ -56,10 +56,5 @@
             System.out.println();
             taskManager.printAllSubTasks();
             System.out.println();
-
-
-
-
-
         }
     }
