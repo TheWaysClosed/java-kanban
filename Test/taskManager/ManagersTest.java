@@ -7,8 +7,8 @@ public class ManagersTest {
 
     @Test
     public void ShouldBeNullIfUtilClassNotInitializedInstances() {
-        TaskManager taskManager = new InMemoryTaskManager(new InMemoryHistoryManager());
-        HistoryManager historyManager = new InMemoryHistoryManager();
+        TaskManager taskManager = Managers.getDefaultTaskManager();
+        HistoryManager historyManager = Managers.getDefaultHistory();
 
         assertNotNull(taskManager);
         assertNotNull(historyManager);
