@@ -1,5 +1,7 @@
     package model;
 
+    import java.util.Objects;
+
     public class Task {
 
         private int id;
@@ -8,10 +10,10 @@
         private Status status;
         private String description;
 
-        public Task(String name, String description, Status status) {
+        public Task(String name, String description) {
             this.name = name;
             this.description = description;
-            this.status = status;
+            this.status = Status.NEW;
         }
 
         public int getId() {
@@ -45,6 +47,17 @@
         public void setDescription(String description) {
             this.description = description;
         }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (!(o instanceof Task)) return false;
+
+            Task task = (Task) o;
+
+            return id == task.id;
+        }
+
         @Override
         public String toString() {
             return "Task{" +

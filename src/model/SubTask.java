@@ -4,8 +4,8 @@
 
         private Epic epic;
 
-        public SubTask(String name, String description, Status status) {
-            super(name, description, status);
+        public SubTask(String name, String description) {
+            super(name, description);
         }
 
         public Epic getEpic() {
