@@ -22,8 +22,10 @@ public class InMemoryTaskManagerTest {
     }
 
     @Test
-    void name() {
-        Task task1 = memoryTaskManager.create(new Task("Task 1", "Description 1"));
+    void ShouldBePositiveWhenTaskDoNotConflictWithinManager() {
+        Task task1 = new Task("Task 1", "Description 1");
+        task1.setId(1);
+        memoryTaskManager.create(task1);
         Task task2 = memoryTaskManager.create(new Task("Task 2", "Description 2"));
 
         Task foundTask1 = memoryTaskManager.getTask(1);

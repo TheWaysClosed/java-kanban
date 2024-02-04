@@ -12,7 +12,7 @@ public class InMemoryHistoryTest {
     //убедитесь, что задачи, добавляемые в HistoryManager, сохраняют предыдущую версию задачи и её данных.
 
     @Test
-    public void testTaskHistory() {
+    public void shouldBePositiveWhenHistorySaveOldValues() {
         HistoryManager historyManager = new InMemoryHistoryManager();
         TaskManager taskManager = new InMemoryTaskManager(historyManager);
 
