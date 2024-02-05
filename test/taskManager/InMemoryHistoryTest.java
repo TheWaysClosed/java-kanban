@@ -13,21 +13,25 @@ import static org.junit.jupiter.api.Assertions.*;
 public class InMemoryHistoryTest {
     @Test
     public void shouldBePositiveWhenHistorySaveOldValues() {
-        HistoryManager historyManager = new InMemoryHistoryManager();
-        TaskManager taskManager = new InMemoryTaskManager(historyManager);
+        TaskManager taskManager = new InMemoryTaskManager();
 
         Task task1 = taskManager.create(new Task("task1", "Description 1"));
         Epic epic1 = taskManager.create(new Epic("epic1", "Description 1", new ArrayList<>()));
-        List<Task> history = historyManager.getAll();
+        List<Task> history = taskManager.getHistory();
 
         taskManager.getEpic(epic1.getId());
 
+        history = taskManager.getHistory();
         assertEquals(1, history.size());
 
         taskManager.getTask(task1.getId());
+
+        history = taskManager.getHistory();
         assertEquals(2, history.size(), "Список должен увеличиться");
+
         taskManager.getTask(task1.getId());
 
+        history = taskManager.getHistory();
         assertEquals(history.get(1), history.get(2), "В истории могут быть одинаковые объекты");
 
         taskManager.getTask(task1.getId());
@@ -39,6 +43,8 @@ public class InMemoryHistoryTest {
         taskManager.getTask(task1.getId());
         taskManager.getTask(task1.getId());
         taskManager.getTask(task1.getId()); // 11
+
+        history = taskManager.getHistory();
         assertEquals(10, history.size(), "История хранит 10 пунктов");
         assertEquals(task1, history.get(0), "Переполненый список должен удалить первый элемент");
     }

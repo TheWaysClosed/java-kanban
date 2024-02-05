@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class InMemoryTaskManagerTest {
 
-    InMemoryTaskManager memoryTaskManager = new InMemoryTaskManager(new InMemoryHistoryManager());
+    InMemoryTaskManager memoryTaskManager = new InMemoryTaskManager();
 
     @Test
     void ShouldBeEqualsByTaskAndTaskId() {
