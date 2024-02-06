@@ -14,7 +14,7 @@
         private final HashMap<Integer, SubTask> subTasks = new HashMap<>();
         private final HistoryManager historyManager = Managers.getDefaultHistory();
 
-        private final LinkedList<Task> oldValuesTask = new LinkedList<>();
+        // Этот лист нигде не используется. Я просто забыл его удалить)
 
         int seq = 1;
 
