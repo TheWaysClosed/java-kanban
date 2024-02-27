@@ -2,9 +2,7 @@
 
     import model.*;
 
-    import java.util.ArrayList;
     import java.util.HashMap;
-    import java.util.LinkedList;
     import java.util.List;
 
     public class InMemoryTaskManager implements TaskManager {
@@ -26,6 +24,7 @@
         public Task create(Task task) {
             task.setId(generateId());
             tasks.put(task.getId(), task);
+            historyManager.add(task);
             return task;
         }
 
@@ -33,6 +32,7 @@
         public Epic create(Epic epic) {
             epic.setId(generateId());
             epics.put(epic.getId(), epic);
+            historyManager.add(epic);
             return epic;
         }
 
@@ -43,6 +43,7 @@
             epic.getSubTasks().add(subTask);
             subTask.setEpic(epic);
             updateEpicStatus(epic);
+            historyManager.add(subTask);
             return subTask;
         }
 
@@ -110,7 +111,7 @@
         public void removeTask(int id) {
             if (tasks.containsKey(id)) {
                 tasks.remove(id);
-
+                historyManager.remove(id);
             } else {
                 return;
             }
@@ -122,8 +123,10 @@
                 Epic epic = epics.get(id);
                 for (SubTask subTask : epic.getSubTasks()) {
                     subTasks.remove(subTask.getId());
+                    historyManager.remove(subTask.getId());
                 }
                 epics.remove(id);
+                historyManager.remove(id);
             } else {
                 return;
             }
@@ -137,6 +140,7 @@
                 Epic epic = subTask.getEpic();
                 epic.getSubTasks().remove(subTask);
                 updateEpicStatus(epic);
+                historyManager.remove(id);
             } else {
                 return;
             }
@@ -144,17 +148,29 @@
 
         @Override
         public void removeAllTasks() {
+            for (int id :  tasks.keySet()) {
+                historyManager.remove(id);
+            }
             tasks.clear();
         }
 
         @Override
         public void removeAllEpic() {
+            for (int id :  epics.keySet()) {
+                historyManager.remove(id);
+            }
             epics.clear();
+            for (int id :  subTasks.keySet()) {
+                historyManager.remove(id);
+            }
             subTasks.clear();
         }
 
         @Override
         public void removeAllSubTasks() {
+            for (int id :  subTasks.keySet()) {
+                historyManager.remove(id);
+            }
             subTasks.clear();
             for (int epicID : epics.keySet()) {
                 epics.get(epicID).setStatus(Status.NEW);
