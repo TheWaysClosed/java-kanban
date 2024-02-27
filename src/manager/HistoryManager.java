@@ -1,4 +1,4 @@
-    package taskManager;
+    package manager;
 
     import model.*;
 
@@ -8,5 +8,7 @@
 
         void add(Task task);
 
-        List<Task> getAll();
+        List<Task> getAllTasks();
+
+        public void remove(int id);
     }

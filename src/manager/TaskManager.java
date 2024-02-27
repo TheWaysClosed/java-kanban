@@ -1,4 +1,4 @@
-package taskManager;
+package manager;
 
 import model.Epic;
 import model.SubTask;
