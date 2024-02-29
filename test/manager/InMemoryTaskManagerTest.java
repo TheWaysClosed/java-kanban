@@ -1,4 +1,4 @@
-package taskManager;
+package manager;
 
 import model.*;
 import org.junit.jupiter.api.Test;
