@@ -1,11 +1,11 @@
     package model;
 
-    import java.util.ArrayList;
     import java.util.List;
 
     public class Epic extends Task {
 
-        private List<SubTask> subTasks = new ArrayList<>();
+        private List<SubTask> subTasks;
+        private final TaskType type = TaskType.EPIC;
 
         public Epic(String name, String description,  List<SubTask> subTasks) {
             super(name, description);
@@ -20,6 +20,11 @@
 
         public void setSubTasks(List<SubTask> subTasks) {
             this.subTasks = subTasks;
+        }
+
+        @Override
+        public TaskType getType() {
+            return type;
         }
 
 

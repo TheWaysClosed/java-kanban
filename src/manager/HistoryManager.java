@@ -10,5 +10,5 @@
 
         List<Task> getAllTasks();
 
-        public void remove(int id);
+        void remove(int id);
     }

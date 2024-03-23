@@ -1,17 +1,15 @@
 package manager;
 
-import model.Epic;
-import model.SubTask;
-import model.Task;
+import model.*;
 import java.util.List;
 
 public interface TaskManager {
 
-    Task create(Task task);
+    Task createTask(Task task);
 
-    Epic create(Epic epic);
+    Epic createEpic(Epic epic);
 
-    SubTask create(SubTask subTask, Epic epic);
+    SubTask createSubTask(SubTask subTask, Epic epic);
 
     void printAllTasks();
 

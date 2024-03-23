@@ -2,26 +2,29 @@
 
     import model.*;
 
+    import java.util.ArrayList;
     import java.util.HashMap;
     import java.util.List;
 
     public class InMemoryTaskManager implements TaskManager {
 
-        private final HashMap<Integer, Task> tasks = new HashMap<>();
-        private final HashMap<Integer, Epic> epics = new HashMap<>();
-        private final HashMap<Integer, SubTask> subTasks = new HashMap<>();
-        private final HistoryManager historyManager = Managers.getDefaultHistory();
-
-        // Этот лист нигде не используется. Я просто забыл его удалить)
+        protected final HashMap<Integer, Task> tasks = new HashMap<>();
+        protected final HashMap<Integer, Epic> epics = new HashMap<>();
+        protected final HashMap<Integer, SubTask> subTasks = new HashMap<>();
+        protected final HistoryManager historyManager;
 
         int seq = 1;
+
+        public InMemoryTaskManager(HistoryManager historyManager) {
+            this.historyManager = Managers.getDefaultHistory();
+        }
 
         private int generateId() {
             return seq++;
         }
 
         @Override
-        public Task create(Task task) {
+        public Task createTask(Task task) {
             task.setId(generateId());
             tasks.put(task.getId(), task);
             historyManager.add(task);
@@ -29,7 +32,7 @@
         }
 
         @Override
-        public Epic create(Epic epic) {
+        public Epic createEpic(Epic epic) {
             epic.setId(generateId());
             epics.put(epic.getId(), epic);
             historyManager.add(epic);
@@ -37,7 +40,7 @@
         }
 
         @Override
-        public SubTask create(SubTask subTask, Epic epic) {
+        public SubTask createSubTask(SubTask subTask, Epic epic) {
             subTask.setId(generateId());
             subTasks.put(subTask.getId(), subTask);
             epic.getSubTasks().add(subTask);
@@ -248,6 +251,18 @@
                 historyManager.add(subTask);
                 return subTask;
             }
+        }
+
+        public List<Task> getAllTasks() {
+            return new ArrayList<>(tasks.values());
+        }
+
+        public List<Epic> getAllEpics() {
+            return new ArrayList<>(epics.values());
+        }
+
+        public List<SubTask> getAllSubTasks() {
+            return new ArrayList<>(subTasks.values());
         }
 
 
