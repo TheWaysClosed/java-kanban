@@ -8,6 +8,8 @@
         private Status status;
         private String description;
 
+        private final TaskType type = TaskType.TASK;
+
         public Task(String name, String description) {
             this.name = name;
             this.description = description;
@@ -44,6 +46,14 @@
 
         public void setDescription(String description) {
             this.description = description;
+        }
+
+        public TaskType getType() {
+            return type;
+        }
+
+        public Integer getEpicId() {
+            return null;
         }
 
         @Override

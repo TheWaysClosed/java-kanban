@@ -4,6 +4,9 @@
 
         private Epic epic;
 
+        Integer epicId;
+        private final TaskType type = TaskType.SUBTASK;
+
         public SubTask(String name, String description) {
             super(name, description);
         }
@@ -14,6 +17,18 @@
 
         public void setEpic(Epic epic) {
             this.epic = epic;
+            this.epicId = epic.getId();
+        }
+
+        @Override
+        public TaskType getType() {
+            return type;
+        }
+
+
+        @Override
+        public Integer getEpicId() {
+            return epicId;
         }
 
         @Override
